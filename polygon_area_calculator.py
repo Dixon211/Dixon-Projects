@@ -17,6 +17,7 @@ class Rectangle:
         return 2*(self.width)+2*(self.height)
     def get_diagonal(self):
         return ((self.width ** 2 + self.height ** 2) ** .5)
+    # need to set 50+ clause
     def get_picture(self):
         star_line = f"{'*'*self.width}\n"
         star_lines = star_line * self.height
