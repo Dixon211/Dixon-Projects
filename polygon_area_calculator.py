@@ -17,14 +17,34 @@ class Rectangle:
         return 2*(self.width)+2*(self.height)
     def get_diagonal(self):
         return ((self.width ** 2 + self.height ** 2) ** .5)
-    # need to set 50+ clause
     def get_picture(self):
-        star_line = f"{'*'*self.width}\n"
-        star_lines = star_line * self.height
-        return star_lines
+        if self.width >= 50 or self.height >= 50:
+            return "Too big for picture."
+        else:
+            star_line = f"{'*'*self.width}\n"
+            star_lines = star_line * self.height
+            return star_lines
+    #come back to this after making the square subclass
     def get_amount_inside(self):
         return None
+class Square(Rectangle):
+    def __init__(self, side):
+        self.side = side
+        #super() allows this constructor to pull the variables from the rectangle parent class and distill them down for the Square
+        # this allows us to set both the height and width, which should be the same to the self.side
+        super().__init__(side, side)
+    def __str__(self):
+        sqr_print = f"Square(side={self.side})"
+        return sqr_print
+    def set_width(self, width):
+        self.side = width
+        self.width = width
+        self.height = width
+    def set_height(self, height):
+        self.side = height
+        self.width = height
+        self.height =height
+    
 
 
-practice_rect = Rectangle(6, 8)
-print(practice_rect.get_picture())
+
