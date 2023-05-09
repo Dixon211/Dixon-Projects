@@ -1,10 +1,11 @@
+import math
 class Rectangle:
     def __init__(self, width, height):
         self.height = height
         self.width = width
     
     def __str__(self):
-        rect_print = f"Rectangle:(width={self.width}, height={self.height})"
+        rect_print = f"Rectangle(width={self.width}, height={self.height})"
         return rect_print
     
     def set_width(self, width):
@@ -24,9 +25,13 @@ class Rectangle:
             star_line = f"{'*'*self.width}\n"
             star_lines = star_line * self.height
             return star_lines
-    #come back to this after making the square subclass
-    def get_amount_inside(self):
-        return None
+    def get_amount_inside(self, shape):
+        shape_area = shape.get_area()
+        this_area = self.get_area()
+        amount_inside = this_area/shape_area
+        rounded_amount = math.floor(amount_inside)
+        return rounded_amount
+
 class Square(Rectangle):
     def __init__(self, side):
         self.side = side
@@ -36,15 +41,6 @@ class Square(Rectangle):
     def __str__(self):
         sqr_print = f"Square(side={self.side})"
         return sqr_print
-    def set_width(self, width):
-        self.side = width
-        self.width = width
-        self.height = width
-    def set_height(self, height):
-        self.side = height
-        self.width = height
-        self.height =height
-    
-
-
+    def set_side(self, side):
+        self.side = side
 
