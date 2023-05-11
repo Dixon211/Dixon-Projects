@@ -7,30 +7,26 @@ class Hat:
 
     def __str__(self):
         return str(self.balls)
-    # need a way to break the loop if draws is larger than balls in the hat,
-    #  most likely fix is outer if statement to the while loop that just states if self.draws > sum of balls_instance values, then return the full list
+    # very happy about the if statement layer
     def draw(self, draws):
         balls_instance = self.balls
         drawn_balls = {}
         self.draws = draws
-        while self.draws > 0:
-            drawn_ball = random.choice(list(balls_instance.keys()))
-            if drawn_ball in balls_instance and balls_instance[drawn_ball] > 0:
-                balls_instance[drawn_ball] -= 1
-                if drawn_ball in drawn_balls:
-                    drawn_balls[drawn_ball] += 1
+        if self.draws > sum(balls_instance.value()):
+            while self.draws > 0:
+                drawn_ball = random.choice(list(balls_instance.keys()))
+                if drawn_ball in balls_instance and balls_instance[drawn_ball] > 0:
+                    balls_instance[drawn_ball] -= 1
+                    if drawn_ball in drawn_balls:
+                        drawn_balls[drawn_ball] += 1
+                    else:
+                        drawn_balls[drawn_ball] = 1
+                    self.draws -= 1
                 else:
-                    drawn_balls[drawn_ball] = 1
-                self.draws -= 1
-            else:
-                continue
+                    continue
+        else:
+            return balls_instance
         return print(drawn_balls)
-
-
-
-
-
-        return None
 
     
     
