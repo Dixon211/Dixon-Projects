@@ -31,8 +31,18 @@ class Hat:
     
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    return None
+    num_of_matches = 0
+    for i in range(num_experiments):
+        hat_copy= copy.deepcopy(hat)
+        balls_drawn = hat_copy.draw(num_balls_drawn)
+        if balls_drawn == expected_balls:
+            num_of_matches += 1
+        else:
+            continue
+    probability = num_of_matches/num_experiments
+    
+    return probability
 
 test_hat = Hat(red=3, blue=2)
-drawn_balls = test_hat.draw(3)
+drawn_balls = test_hat.draw(2)
 print(str(drawn_balls))
