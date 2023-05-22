@@ -62,7 +62,7 @@ def equation_formatter(problems):
         output = str(top_row + "\n" + bottom_row + "\n" + lines)
 
 
-    return output
+    return print(output)
        
 
 equation_formatter(problems)
