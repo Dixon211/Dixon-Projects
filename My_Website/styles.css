@@ -1,0 +1,16 @@
+.sidebar_menu {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+.s_menu_box{
+    color:blueviolet;
+    flex-direction: column;
+}
+.sidebar_btn{
+    display: block;
+    width: 200px;px;
+}
+.my_picture{
+    width:200px;
+}
