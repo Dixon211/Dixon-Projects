@@ -1,5 +1,4 @@
 from tkinter import *
-import flet as ft
 
 def donothing():
     x+=0
@@ -10,12 +9,13 @@ root.resizable(True, True)
 root.bind("<Escape>", lambda x: root.destroy())
 root.configure(bg='blue')
 root.geometry('1000x800')
+root.overrideredirect(True)
 
 #create the top frame
-#top_frame = Frame(root, bg = "gray", height=30)
-#top_frame.grid( row = '0', column = '0', sticky="nsew")
+top_frame = Frame(root, bg = "gray", height=30)
+top_frame.grid( row = '0', column = '0', sticky="nsew")
 
-top_menu = Menu(root)
+top_menu = Menu(top_frame)
 top_filemenu=Menu(top_menu, tearoff=0)
 top_filemenu.add_command(label="New", command=donothing)
 top_filemenu.add_command(label='Open', command=donothing)
