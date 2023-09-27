@@ -1,0 +1,21 @@
+input_shape takes height, width dimensions. This is most notably seen in pictures
+where the pixel count is used for this.
+We used flatten to turn the image into a list for input and sequential lets the network
+know it needs to pass through each layer sequentially. (flatten is just input, not a layer)
+and then create 2 layers of neurons, one is 128 in length, the other is 10
+
+example 1-1:
+picture is 28x28 pixels
+model = keras.sequential([
+    keras.layers.Flatten(input_shape=(28,28)),
+    keras.layers.Dense(128, activation= tf.nn.relu),
+    keras.layers.Dense(10, activation=tf.nn.softmax)
+    ])
+
+hidden layers are just middle layers, in example 1-1,
+the line keras.layers.Dense(128, activation= tf.nn.relu), is a hidden layer
+Also the number of neurons for this line was picked arbitrarily as most hidden layers are.
+More neurons means slower speed but better learning and the process for finding the right amount is called "hyperparameter tuning"
+hyperparameters = value for the training, like number of nerusoins
+parameters = internal values of neurons
+
