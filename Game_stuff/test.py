@@ -1,35 +1,22 @@
-import pulp
+import multiprocessing as mp
+import cv2
+import sys
 
-# Create a linear programming problem
-lp_problem = pulp.LpProblem("Optimal_Production", pulp.LpMaximize)
+def grayscale_view(video_feed, queue):
+        rval, frame = video_feed.read()
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        queue.put(gray)
+        print(queue)
 
-# Define decision variables
-x = pulp.LpVariable("Rods", lowBound=0, cat=pulp.LpContinuous)
-y = pulp.LpVariable("Screws", lowBound=0, cat=pulp.LpContinuous)
-z = pulp.LpVariable("Rotors", lowBound=0, cat=pulp.LpContinuous)
-a = pulp.LpVariable("Iron_Plates", lowBound=0, cat=pulp.LpContinuous)
-b = pulp.LpVariable("Reinforced_Plates", lowBound=0, cat=pulp.LpContinuous)
-y_from_rods = pulp.LpVariable("Screws_from_Rods", lowBound=0, cat=pulp.LpContinuous)
-z_from_rods = pulp.LpVariable("Rotors_from_Rods", lowBound=0, cat=pulp.LpContinuous)
 
-# Define the objective function (maximize total value)
-lp_problem += 20 * x + 2 * y, "Total_Value"
 
-# Define the constraints
-lp_problem += x + y + 23 * z + 30 * a + 60 * b + y_from_rods + z_from_rods <= 120, "Iron_Constraint"
-lp_problem += y_from_rods <= 10 * x, "Screws_from_Rods_Constraint"
-lp_problem += z_from_rods <= 20 * x, "Rotors_from_Rods_Constraint"
+if __name__=="__main__":
+    frame_queue = mp.Queue()
+    vc = cv2.VideoCapture(0)
 
-# Solve the linear programming problem
-lp_problem.solve()
+    while True:
+        camera_feed = mp.Process(target=grayscale_view, args=(vc, frame_queue,))
+        camera_feed.start()
+        camera_feed.join()
+        print("starting camera feed")
 
-# Print the results
-print("Status:", pulp.LpStatus[lp_problem.status])
-print("Rods produced:", x.varValue)
-print("Screws produced:", y.varValue)
-print("Rotors produced:", z.varValue)
-print("Iron Plates produced:", a.varValue)
-print("Reinforced Plates produced:", b.varValue)
-print("Screws from Rods produced:", y_from_rods.varValue)
-print("Rotors from Rods produced:", z_from_rods.varValue)
-print("Total Value:", pulp.value(lp_problem.objective))
