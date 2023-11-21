@@ -9,10 +9,11 @@ class Window():
         self.window.geometry("900x500")
 
     def display_video(self):
-        a = cf.get_video_feed()
         print("creating label")
         panel = Label(self.window, image=a)
         panel.pack()
+        a = cf.get_video_feed()
+        
     
     def mainloop(self):
         self.window.mainloop()
