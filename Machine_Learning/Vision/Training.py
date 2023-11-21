@@ -29,7 +29,7 @@ def create_user():
         x = x-1
 
     ret, frame = vc.read()
-    path = (f"./Training/{name}.jpg")
+    path = (f"./{name}.jpg")
     take_picture(ret, path, frame)
     
     pic = Image.open(path)
