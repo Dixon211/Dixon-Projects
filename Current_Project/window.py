@@ -10,9 +10,10 @@ class Window():
 
     def display_video(self):
         print("creating label")
-        panel = Label(self.window, image=a)
-        panel.pack()
         a = cf.get_video_feed()
+        panel = tk.Label(self.window, image=a)
+        panel.pack()
+        
         
     
     def mainloop(self):
@@ -23,7 +24,7 @@ class Window():
 def create_window():
     #print(tk.TkVersion)
     a = Window()
-    Window.display_video()
+    Window.display_video(a)
     a.mainloop()
 
 
