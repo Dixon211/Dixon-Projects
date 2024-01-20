@@ -1,0 +1,7 @@
+﻿  Win32practice.cpp
+C:\Users\Assoc\OneDrive\Documents\GitHub\Dixon-Projects\C++\VisualStudio\Win32practice\Win32practice\Win32practice.cpp(24,21): error C2065: 'WindowProc': undeclared identifier
+C:\Users\Assoc\OneDrive\Documents\GitHub\Dixon-Projects\C++\VisualStudio\Win32practice\Win32practice\Win32practice.cpp(27,23): error C2440: '=': cannot convert from 'const char [13]' to 'LPCWSTR'
+  C:\Users\Assoc\OneDrive\Documents\GitHub\Dixon-Projects\C++\VisualStudio\Win32practice\Win32practice\Win32practice.cpp(27,23):
+  Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
+  
+C:\Users\Assoc\OneDrive\Documents\GitHub\Dixon-Projects\C++\VisualStudio\Win32practice\Win32practice\Win32practice.cpp(30,1): error C2059: syntax error: '}'

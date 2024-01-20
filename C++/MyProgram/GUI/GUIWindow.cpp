@@ -56,15 +56,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     ShowWindow(hwnd, nCmdShow);
     
     //run loop
-
     MSG msg = {};
-    while (GetMessage(&msg, NULL, 0, 0) > 0)
+    while (GetMessage(&msg, NULL, 0, 0) > 0) //(message queue point, which window messages its handles NULL means get all, message range, retreave range )
     {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
 
     }
-    return 0;
+
     
 }
 
