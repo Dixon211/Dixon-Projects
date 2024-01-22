@@ -24,7 +24,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         L"Just Chatting", //title
         WS_OVERLAPPEDWINDOW, //style
 
-        //size + position
+        //size + position: x, y, width, height
         500, 500, 500, 500,
 
         NULL, //Parent Window
@@ -42,7 +42,7 @@ HWND textbox = CreateWindowEx(
     L"STATIC",
     L"This is the textbox",
     WS_CHILD | WS_VISIBLE,
-    10,10,300,25,
+    0,0,300,25,
     parentwin,
     NULL,
     hInstance,
