@@ -50,26 +50,33 @@ def newdata():
             server=server,
             user=user,
             password=password,
-            database=database,
-            as_dict=True)
+            database=database)
         cursor=db.cursor()
 
         
         match request.method:
             case "GET":
-                return "GET message received"
-            case "PUT":
-                return "PUT message received"
+                cursor.execute("SELECT COUNT(MACAddress) FROM Machine WHERE MACAddress = %s", (recieved[0]["MACAddress"],))
+                result = cursor.fetchone()
+                return str(result)
             case "POST":
-               return "POST message received"
+                cursor.execute("INSERT INTO Machine (DefaultGateway, LocalAddress, MACAddress, MachineName) VALUES ('%s', '%s', '%s', '%s');" % (recieved[0]["DefaultGateway"], recieved[0]["LocalAddress"], recieved[0]["MACAddress"], recieved[0]["MachineName"]))
+                db.commit()
+                return f"POST received"
+            case "PUT":
+               cursor.execute("UPDATE Machine SET DefaultGateway= '%s', LocalAddress= '%s', MachineName= '%s' WHERE MACAddress = '%s';" % (recieved[0]["DefaultGateway"], recieved[0]["LocalAddress"], recieved[0]["MachineName"], recieved[0]["MACAddress"]))
+               db.commit()
+               return "PUT message received"
             case "DELETE":
                 return "DELETE message received"
 
-        #cursor.execute()
         db.close()
 
 
 
     except Exception as e:
-        return str(e)
+        db.rollback()
+        return jsonify({"error": str(e)})
 
+if __name__ == "__main__":
+    app.run(debug=True)
