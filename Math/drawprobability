@@ -1,0 +1,14 @@
+#basic calculation of percentage chance to draw a specific card in a deck of 100
+
+
+def draw_percentage(draws = 1, cardsindeck = 99):
+    chance = 0
+    start = cardsindeck
+    for i in range(draws):
+        chance += ((1/cardsindeck)*100)
+        cardsindeck -= 1
+    return f"\nYou have a {round(chance, 2)}% to draw the card you want in {draws} draws with {start} cards in the deck\n"
+
+print(draw_percentage(draws=7, cardsindeck=98))
+
+print(draw_percentage(draws=7, cardsindeck=99))

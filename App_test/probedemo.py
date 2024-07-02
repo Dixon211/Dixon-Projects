@@ -5,11 +5,11 @@ url = "http://127.0.0.1:5000/newdata"
 data = [{"DefaultGateway":"30.30.30.30","LocalAddress":"30.30.30.30","MACAddress":"0000-0000-0002","MachineName":"TestName3"}]
 
 
-memory = 0
+process_code = 0
 dmem = []
 
 while True:
-    match memory:
+    match process_code:
         #check for entry with GET
         case 0:
             response = requests.get(url, json=data)
@@ -17,10 +17,10 @@ while True:
             if response.status_code == 200:
                 print(f"GET connection Successful!\nResponse: {response.text}")
                 if response.text == '(0,)':
-                    memory = 1
+                    process_code = 1
                 else:
-                    memory = 2
-                print(f"\nmemory={memory}")
+                    process_code = 2
+                print(f"\nmemory={process_code}")
             else:
                 print(f"Something went wrong: {response.status_code}")
 
@@ -30,7 +30,7 @@ while True:
 
             if response.status_code == 200:
                 print(f" POST connection Successful!\nResponse: {response.text}")
-                memory = 2
+                process_code = 2
                 dmem=data
             else:
                 print(f"Something went wrong: {response.status_code}")
@@ -38,7 +38,7 @@ while True:
         #edit entry with PUT
         case 2:
             if dmem == data:
-                memory=3
+                process_code=3
             else:
                 response = requests.put(url, json=data)
                 if response.status_code == 200:
@@ -52,5 +52,5 @@ while True:
                 print("no changes")
                 pass
             else:
-                memory = 2
+                process_code = 2
     time.sleep(5)

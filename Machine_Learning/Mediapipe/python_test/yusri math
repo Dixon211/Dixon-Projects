@@ -1,0 +1,81 @@
+import math
+import matplotlib.pyplot as plt
+
+def yusri(n, k, p):
+   answer = math.factorial(n)/(math.factorial(k)*math.factorial(n-k))*(p**k)*((1-p)**(n-k))
+   return round(answer*100, 2)
+
+def banner(string):
+  head = []
+  signal = True
+  for x in string:
+    head.append(x)
+
+  while len(head) < 40:
+    if signal == True:
+      head.append("*")
+      signal = False
+    else:
+      head.insert( 0,"*")
+      signal = True  
+  banner_string= ""
+  for y in head:
+    banner_string = banner_string + y
+
+  return "\n" + banner_string + "\n"   
+
+def area_structure(list):
+  lines = f"All Cards, Free Spells: {list[0]}%\n4 Card Draw, 2 Damage: {list[1]}%\n3 Card Draw, 4 Damage: {list[2]}%\n2 Card Draw, 6 Damage: {list[3]}%\n1 Card Draw, 8 Damage: {list[4]}%\nNo Card Draw, 10 Damage: {list[5]}%"
+  print(lines)
+
+def znd_formatting(list):
+  lines = f"5 Card Draw: {list[0]}%\n4 Card Draw: {list[1]}%\n3 Card Draw: {list[2]}%\n2 Card Draw: {list[3]}%\n1 Card Draw: {list[4]}%\nNo Cards: {list[4]}%"
+  print(lines)
+
+
+i = 5
+no_thumb = []
+with_thumb=[]
+znd_nothumb=[]
+znd_thumb=[]
+while i > -1:
+  a = yusri(5, i, .5)
+  b = yusri(5, i, .75)
+  c = yusri(i, i, .5)
+  d = yusri(i, i, .75)
+  no_thumb.append(a)
+  with_thumb.append(b)
+  znd_nothumb.append(c)
+  znd_thumb.append(d)
+  i = i - 1
+
+
+
+
+
+print(banner("Yusri 5 coins, no thumb"))
+
+#no_thumb = [yusri(5, 5, .5), yusri(5, 4, .5), yusri(5, 3, .5), yusri(5, 2, .5), yusri(5, 1, .5), yusri(5, 0, .5)]
+area_structure(no_thumb)
+print(banner("Yusri 5 coins, with thumb"))
+#with_thumb = [yusri(5, 5, .75), yusri(5, 4, .75), yusri(5, 3, .75), yusri(5, 2, .75), yusri(5, 1, .75), yusri(5, 0, .75)]
+area_structure(with_thumb)
+#with_throne = []
+#for i in range(1, 100):
+  #it = yusri(i, 1, (with_thumb[0]/100))
+ # with_throne.append(it)
+
+print(banner("Zndrsplt no thumb"))
+znd_formatting(znd_nothumb)
+print(banner("Zndsplt with thumb"))
+znd_formatting(znd_thumb)
+
+print("\n\n")
+#print("\n"+ str(with_throne) + "\n")
+
+#plt.plot(with_throne)
+#plt.xlabel('Trigger instances, 5 coins each')
+#plt.ylabel('Percentage')
+#plt.title('Yusri percentage of 5 cards, with thumb')
+#plt.show()
+
