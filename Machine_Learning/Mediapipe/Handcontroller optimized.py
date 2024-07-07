@@ -86,10 +86,10 @@ class Handcontroller:
 
                     if ((self.thumbx >= (self.pointerx-ds)) and ((self.pointerx+ds) >= self.thumbx)) and (self.thumby >= (self.pointery-ds) and (self.pointery+ds) >= self.thumby):
                         cv2.circle(frame, (self.pointerx, self.pointery), 5, (0,255,0), -1)
-                        #pyautogui.click(button='left')
+                        pyautogui.click(button='left')
                     elif (self.thumbx >= (self.middlex-ds) and (self.middlex+ds) >= self.thumbx) and (self.thumby >= (self.middley-ds) and (self.middley+ds) >= self.thumby):
                         cv2.circle(frame, (self.middlex, self.middley), 5, (0,255,0), -1)
-                        #pyautogui.click(button='right')
+                        pyautogui.click(button='right')
                     elif (self.thumbx >= (self.ringx-ds) and (self.ringx+ds) >= self.thumbx) and (self.thumby >= (self.ringy-ds) and (self.ringy+ds) >= self.thumby):
                         cv2.circle(frame, (self.ringx, self.ringy), 5, (0,255,0), -1)
                         self.activestartx, self.activestarty = self.handmidx, self.handmidy
