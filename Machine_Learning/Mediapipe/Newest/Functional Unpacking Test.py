@@ -1,17 +1,33 @@
 import cv2
 import mediapipe as mp
+import multiprocessing as multi
 
 
 class Handcontroller:
     def __init__(self, handclass):
         self.handata = handclass
-        self.activation = 0
         self.activestartx, self.activestarty = 0,0
         self.results = 0
         self.thumbx, self.thumby = 0,0
         self.pointerx, self.pointery = 0,0
-    def updatevalues(self, ):
 
+    def updatevalues(self, image):
+        self.results = hands.process(image)
+        ds = 20
+        #handlandmark list is not subscriptable, best work around
+        for i, handlandmark in enumerate(self.results.multi_hand_landmarks[0]):
+            match i:
+                case 4:
+                    self.thumbx, self.thumby = int(handlandmark.x * frame.shape[1]), int(handlandmark.y * frame.shape[0])
+                case 8:
+                    self.pointerx, self.pointery = int(handlandmark.x * frame.shape[1]), int(handlandmark.y * frame.shape[0])
+        if self.thumbx in range(self.pointerx-ds, self.pointerx+ds) | self.thumby in range(self.pointery-ds, self.pointery+ds):
+            cv2.circle(frame, (self.thumbx, self.thumby), 5, (0,0,255), -1)
+            if self.activestartx == 0:
+                self.activestartx, self.activestarty = self.thumbx, self.thumby
+        else:
+            self.activestartx, self.activestarty = 0,0
+                
 
 
 
