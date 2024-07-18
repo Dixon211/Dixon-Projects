@@ -54,6 +54,7 @@ class Handcontroller():
 
     def run(self):
         cv2.putText(frame, self.string, (self.cords['mid']), cv2.FONT_HERSHEY_COMPLEX, .5, (0,0,0), 2)
+        cv2.circle(frame, (self.midmemory), 5, (0,0,255), -1)
         #self.drawcircles()
         self.midmemory = self.cords['mid']
 
@@ -132,20 +133,36 @@ if __name__ == "__main__":
                 match right_hand.id:
                         case True:
                             right_hand.cords = handcords[0]
+                            right_hand.midmemory = handcords[0]['mid']
                             left_hand.cords = handcords[1]
+                            left_hand.midmemory = handcords[1]['mid']
+
                         case False:
                             right_hand.cords = handcords[1]
+                            right_hand.midmemory = handcords[1]['mid']
                             left_hand.cords = handcords[0]
-
+                            left_hand.midmemory = handcords[0]['mid']
             else:
                 match len(results.multi_hand_landmarks):
                     case 1:
-                        right_hand.run()
-                        left_hand.run()
+                        if np.linalg.norm(handcords[0]['mid']-right_hand.midmemory)<np.linalg.norm(handcords[0]['mid']-left_hand.midmemory):
+                            right_hand.cords = handcords[0]
+                            right_hand.run()
+                        else:
+                            left_hand.cords = handcords[0]
+                            left_hand.run()
                     case 2:
-                        right_hand.run()
-                        left_hand.run()
-
+                        if np.linalg.norm(handcords[0]['mid']-right_hand.midmemory)<np.linalg.norm(handcords[0]['mid']-left_hand.midmemory):
+                            right_hand.cords = handcords[0]
+                            left_hand.cords = handcords[1]
+                            right_hand.run()
+                            left_hand.run()
+                        else:
+                            right_hand.cords = handcords[1]
+                            left_hand.cords = handcords[0]
+                            right_hand.run()
+                            left_hand.run()
+            cv2.putText(f"Right Hand Memory Distances\nRight_hand: {np.linalg.norm(right_hand.midmemory)}"
         else:
             text_size = cv2.getTextSize("show me your hands", cv2.FONT_HERSHEY_COMPLEX, .5, 2)
             text_x = int(frame.shape[1]/2-(text_size[0][0]/2)) 
