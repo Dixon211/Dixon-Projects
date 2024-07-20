@@ -3,6 +3,24 @@ import mediapipe as mp
 import pyautogui
 import numpy as np
 
+#public
+def handcentering(image):
+    text = f"Put hands in center of rectangles"
+    font = cv2.FONT_HERSHEY_COMPLEX
+    fontsize = .5
+    fontthickness = 2
+    fontcolor = (0,0,0)
+    
+    #add rectangles
+    cv2.rectangle(image, (int(image.shape[1]/8),int(image.shape[0]/6)), (int(image.shape[1]*(3/8)), int(image.shape[0]*(5/6))), (0,0,255), 2)
+    cv2.rectangle(image, (int(image.shape[1]*(5/8)), int(image.shape[0]/6)), (int(image.shape[1]*(7/8)), int(image.shape[0]*(5/6))), (0,0,255), 2)
+
+    # calculate to compensate for string length, font size. Then place text
+    text_size = cv2.getTextSize(text, font, fontsize, fontthickness)
+    text_x = int(frame.shape[1]/2-(text_size[0][0]/2)) 
+    text_y = int(frame.shape[0]/12)
+    cv2.putText(image, text, (text_x, text_y), font, fontsize, fontcolor, fontthickness)
+
 class Handcontroller:
     def __init__(self, handclass):
         self.handata = handclass

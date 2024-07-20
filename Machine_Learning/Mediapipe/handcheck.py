@@ -18,7 +18,7 @@ def overlay(image):
     cv2.rectangle(copy, (int(frame.shape[1]/8),int(frame.shape[0]/6)), (int(3*frame.shape[1]/8), int(5*frame.shape[0]/6)), (0,0,255), 2)
     cv2.rectangle(copy, (int(5*frame.shape[1]/8), int(frame.shape[0]/6)), (int(7*frame.shape[1]/8), int(5*frame.shape[0]/6)), (0,0,255), 2)
 
-def overlay2(image):
+def handcentering(image):
     text = f"Put hands in center of rectangles"
     font = cv2.FONT_HERSHEY_COMPLEX
     fontsize = .5
@@ -41,7 +41,7 @@ while cap.isOpened():
     if not ret:
         break
     image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    overlay2(frame)
+    handcentering(frame)
     cv2.imshow('Hand Tracking', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
