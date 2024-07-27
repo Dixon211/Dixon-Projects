@@ -162,14 +162,17 @@ if __name__ == "__main__":
                             left_hand.cords = handcords[0]
                             right_hand.run()
                             left_hand.run()
-            cv2.putText(f"Right Hand Memory Distances\nRight_hand: {np.linalg.norm(right_hand.midmemory)}"
+            cv2.putText(frame, f"Right_handdistance: {np.linalg.norm(right_hand.midmemory)}", (0, 10), cv2.FONT_HERSHEY_COMPLEX, .5, (0,0,0), 2)
+            cv2.putText(frame, f"Left_handdistance: {np.linalg.norm(left_hand.midmemory)}", (0, 30), cv2.FONT_HERSHEY_COMPLEX, .5, (0,0,0), 2)
         else:
             text_size = cv2.getTextSize("show me your hands", cv2.FONT_HERSHEY_COMPLEX, .5, 2)
             text_x = int(frame.shape[1]/2-(text_size[0][0]/2)) 
             text_y = int(frame.shape[0]/12)
             cv2.putText(frame, "Show me your hands", (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX, .5, (0,0,0), 2)
         #show image
-        cv2.imshow('Hand Tracking', frame)
+        cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
+        cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
+        cv2.imshow('window', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
