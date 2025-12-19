@@ -1,2 +1,0 @@
-import pywifi
-help(pywifi)
